@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <memory.h>
+
+#define MAX_degree 10 /*MAX degree of polynomial+1 多項式的最大值+1*/
+
+typedef struct
+{
+	int degree; //最高幕次
+	int coef [MAX_degree]; //存放多項式各幕次的係數的陣列
+	/*多項式 3𝑥^2+5𝑥+1，coef[2]=3 coef[1]=5 coef[0]=1*/
+} polynomial;
+
+#define MAX_TERMS 20 /*size of terms array 項數陣列的大小*/
+typedef struct
+{
+	int coef; //係數
+	int expo; //幕次
+} polynomial_term;
+
+polynomial_term terms [MAX_TERMS];
+/*3𝑥^2+5𝑥+1,terms[0]=3x^2 terms[1]=5x...以此類推*/
+int avail = 0;
+	
