@@ -1,4 +1,4 @@
-// HW4.cpp : ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
+// HW4.cpp : ï¿½wï¿½qï¿½Dï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Îµ{ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Jï¿½Iï¿½C
 //
 
 #include <stdio.h>
@@ -51,7 +51,7 @@ void inputTerms(polynomialTerm terms[], int coef, int expo)
 				for(int j = i; j <= MAX_TERMS; j++)
 				{
 					terms[j] = terms[j+1];
-					if(terms[j].coef == NULL)break;
+					if(terms[j].coef == 0)break;
 				}
 			}
 		}
@@ -111,13 +111,13 @@ void inputLinkTerms(linkedPolynomialTerm *&polyPtr, int coef, int expo)
 		}
 		return;
 	}
-	//if:poly¤º¨SªF¦è(©|¥¼¿é¤J)or"·sªº­Èªº¦¸¤è"¤ñ"ÀYªº¦¸¤è"¤j
-	if(polyPtr == nullptr || tmpPtr->expo > polyPtr->expo) //±µ¦b"ÀY"ªº«e­± 
+	//if:polyï¿½ï¿½ï¿½Sï¿½Fï¿½ï¿½(ï¿½|ï¿½ï¿½ï¿½ï¿½J)or"ï¿½sï¿½ï¿½ï¿½Èªï¿½ï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½"ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"ï¿½j
+	if(polyPtr == nullptr || tmpPtr->expo > polyPtr->expo) //ï¿½ï¿½ï¿½b"ï¿½Y"ï¿½ï¿½ï¿½eï¿½ï¿½ 
 	{
 		tmpPtr->nextTermPtr = polyPtr;
 		polyPtr = tmpPtr;
 	}
-	else if(tmpPtr->expo == polyPtr->expo) //else if:"·sªº­Èªº¦¸¤è"µ¥©ó"ÀYªº¦¸¤è"¡A´Nª½±µ´À´«
+	else if(tmpPtr->expo == polyPtr->expo) //else if:"ï¿½sï¿½ï¿½ï¿½Èªï¿½ï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½ï¿½ï¿½"ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"ï¿½Aï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		tmpPtr->nextTermPtr = polyPtr->nextTermPtr;
 		polyPtr = tmpPtr;
@@ -126,19 +126,19 @@ void inputLinkTerms(linkedPolynomialTerm *&polyPtr, int coef, int expo)
 	{
 		linkedPolynomialTerm *prev = nullptr;
 		linkedPolynomialTerm *current = polyPtr;
-		while(current->coef != 0 && tmpPtr->expo < current->expo) //¦pªG"²{¦b¦ì¸m¹õ¦¸"¤ñ"¿é¤Jªº¹õ¦¸"¤jªº¸Ü¡A´NÄ~Äò©¹«á§ä
-		{//§ä¨ì¥Ø¼Ð:5 3 1  [2]
+		while(current->coef != 0 && tmpPtr->expo < current->expo) //ï¿½pï¿½G"ï¿½{ï¿½bï¿½ï¿½mï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½"ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"ï¿½jï¿½ï¿½ï¿½Ü¡Aï¿½Nï¿½~ï¿½ò©¹«ï¿½ï¿½
+		{//ï¿½ï¿½ï¿½Ø¼ï¿½:5 3 1  [2]
 			prev = current;
 			current = current->nextTermPtr;
-		}//­n¬O1.²{¦b¦ì¸m¤£¦s¦b or 2.§ä¨ì¥Ø¼Ð ¤~·|°±
-		if(current->coef == 0)//¨ì§À¤Ú¤F ´Nª½±µ±µ¦b«á­±
+		}//ï¿½nï¿½O1.ï¿½{ï¿½bï¿½ï¿½mï¿½ï¿½ï¿½sï¿½b or 2.ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½~ï¿½|ï¿½ï¿½
+		if(current->coef == 0)//ï¿½ï¿½ï¿½ï¿½Ú¤F ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bï¿½á­±
 			prev->nextTermPtr = tmpPtr;
-		else if(current->expo == tmpPtr->expo) //¨âªÌ¹õ¦¸¬Û¦Pªº¸Ü¡A´À´«±¼
+		else if(current->expo == tmpPtr->expo) //ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½Û¦Pï¿½ï¿½ï¿½Ü¡Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			tmpPtr->nextTermPtr = current->nextTermPtr;
 			current = tmpPtr;
 		}
-		else //²{¦bªº¦ì¸m¤§¹õ¦¸<¿é¤J¤§¹õ¦¸,©Ò¥H¶ë¨ì²{¦b¦ì¸mªº«e­±
+		else //ï¿½{ï¿½bï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ò¥Hï¿½ï¿½ï¿½{ï¿½bï¿½ï¿½mï¿½ï¿½ï¿½eï¿½ï¿½
 		{
 			prev->nextTermPtr = tmpPtr;
 			tmpPtr->nextTermPtr = current;
@@ -169,14 +169,14 @@ void addArrayBasedPoly(polynomialTerm a[], polynomialTerm b[], polynomialTerm d[
             d[dIndex] = b[bIndex];
             bIndex++;
         }
-		//±N¹õ¦¸¤jªº¦s¤Jd
+		//ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½sï¿½Jd
 
         else 
 		{
             d[dIndex].coef = a[aIndex].coef + b[bIndex].coef;
             d[dIndex].expo = a[aIndex].expo;
 
-            if (d[dIndex].coef != 0)//¥[Á`¬°0ªº¸Ü¤£³B²z
+            if (d[dIndex].coef != 0)//ï¿½[ï¿½`ï¿½ï¿½0ï¿½ï¿½ï¿½Ü¤ï¿½ï¿½Bï¿½z
                 dIndex++;
 
             aIndex++,bIndex++;

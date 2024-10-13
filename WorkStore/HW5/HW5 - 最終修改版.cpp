@@ -1,4 +1,4 @@
-// HW5.cpp : �w�q�D���x���ε{�����i�J�I�C
+// HW5.cpp : �w�q�D���x���ε{�����i�J�I�C
 //
 
 #include "stdio.h"
@@ -41,7 +41,7 @@ public:                                                                  /////
 				for(int j = i; j <= MAX_TERMS; j++)
 				{
 					terms[j] = terms[j+1];
-					if(terms[j].coef == NULL)break;
+					if(terms[j].coef == 0)break;
 				}
 			}
 		}
@@ -93,14 +93,14 @@ public:                                                                  /////
 				terms[dIndex] = b.terms[bIndex];
 				bIndex++;
 			}
-			//�N�����j���s�Jd
+			//�N�����j���s�Jd
 
 			else 
 			{
 				terms[dIndex].coef = a.terms[aIndex].coef + b.terms[bIndex].coef;
 				terms[dIndex].expo = a.terms[aIndex].expo;
 
-				if (terms[dIndex].coef != 0)//�[�`��0���ܤ��B�z
+				if (terms[dIndex].coef != 0)//�[�`��0���ܤ��B�z
 					dIndex++;
 
 				aIndex++,bIndex++;
@@ -196,6 +196,7 @@ public:                                                          /////
 	tmpPtr->nextTermPtr = nullptr;
 	if(coef == 0)
 	{
+		if(polynomialTermPtr == nullptr)return;
 		if(polynomialTermPtr->expo == expo)
 		{
 			polynomialTermPtr = polynomialTermPtr->nextTermPtr;
@@ -214,31 +215,39 @@ public:                                                          /////
 		}
 		return;
 	}
-	if(polynomialTermPtr == nullptr || tmpPtr->expo > polynomialTermPtr->expo) //���b"�{�b��"���e��
+	//if:poly內沒東西(尚未輸入)or"新的值的次方"比"頭的次方"大
+	if(polynomialTermPtr == nullptr || tmpPtr->expo > polynomialTermPtr->expo) //接在"頭"的前面 
 	{
 		tmpPtr->nextTermPtr = polynomialTermPtr;
 		polynomialTermPtr = tmpPtr;
 	}
-	else if(tmpPtr->expo == polynomialTermPtr->expo)
+	else if(tmpPtr->expo == polynomialTermPtr->expo) //else if:"新的值的次方"等於"頭的次方"，就直接替換
 	{
 		tmpPtr->nextTermPtr = polynomialTermPtr->nextTermPtr;
 		polynomialTermPtr = tmpPtr;
 	}
 	else 
 	{
+		LinkedPolynomialTerm *prev = polynomialTermPtr;
 		LinkedPolynomialTerm *current = polynomialTermPtr;
-		while(current->nextTermPtr != nullptr && tmpPtr->expo < current->nextTermPtr->expo)
+		while(tmpPtr->expo < current->expo) //如果"現在位置幕次"比"輸入的幕次"大的話，就繼續往後找
+		{//找到目標:5 3 1  [2]
+			prev = current;
 			current = current->nextTermPtr;
+			if(!current)break;
+		}//要是1.現在位置不存在 or 2.找到目標 才會停
 		
-		if(current->nextTermPtr->expo == tmpPtr->expo)
-		{
-			tmpPtr->nextTermPtr = current->nextTermPtr->nextTermPtr;
-			current->nextTermPtr = tmpPtr;
-		}
-		else //���b"�{�b��"���᭱
+		if(current == nullptr)//到尾巴了 就直接接在後面
+			prev->nextTermPtr = tmpPtr;
+		else if(current->expo == tmpPtr->expo) //兩者幕次相同的話，替換掉
 		{
 			tmpPtr->nextTermPtr = current->nextTermPtr;
-			current->nextTermPtr = tmpPtr;
+			prev->nextTermPtr = tmpPtr;
+		}
+		else //現在的位置之幕次<輸入之幕次,所以塞到現在位置的前面
+		{
+			prev->nextTermPtr = tmpPtr;
+			tmpPtr->nextTermPtr = current;
 		}
 
 	}

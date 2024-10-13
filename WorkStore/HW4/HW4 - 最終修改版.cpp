@@ -1,4 +1,4 @@
-// HW4.cpp : ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
+// HW4.cpp : å®šç¾©ä¸»æ§å°æ‡‰ç”¨ç¨‹å¼çš„é€²å…¥é»ã€‚
 //
 
 #include <stdio.h>
@@ -51,7 +51,7 @@ void inputTerms(polynomialTerm terms[], int coef, int expo)
 				for(int j = i; j <= MAX_TERMS; j++)
 				{
 					terms[j] = terms[j+1];
-					if(terms[j].coef == NULL)break;
+					if(terms[j].coef == 0)break;
 				}
 			}
 		}
@@ -111,7 +111,7 @@ void inputLinkTerms(linkedPolynomialTerm *&polyPtr, int coef, int expo)
 		}
 		return;
 	}
-	if(polyPtr == nullptr || tmpPtr->expo > polyPtr->expo) //±µ¦b"²{¦bªº"ªº«e­±
+	if(polyPtr == nullptr || tmpPtr->expo > polyPtr->expo) //æ¥åœ¨"ç¾åœ¨çš„"çš„å‰é¢
 	{
 		tmpPtr->nextTermPtr = polyPtr;
 		polyPtr = tmpPtr;
@@ -132,7 +132,7 @@ void inputLinkTerms(linkedPolynomialTerm *&polyPtr, int coef, int expo)
 			tmpPtr->nextTermPtr = current->nextTermPtr->nextTermPtr;
 			current->nextTermPtr = tmpPtr;
 		}
-		else //±µ¦b"²{¦bªº"ªº«á­±
+		else //æ¥åœ¨"ç¾åœ¨çš„"çš„å¾Œé¢
 		{
 			tmpPtr->nextTermPtr = current->nextTermPtr;
 			current->nextTermPtr = tmpPtr;
@@ -163,14 +163,14 @@ void addArrayBasedPoly(polynomialTerm a[], polynomialTerm b[], polynomialTerm d[
             d[dIndex] = b[bIndex];
             bIndex++;
         }
-		//±N¹õ¦¸¤jªº¦s¤Jd
+		//å°‡å¹•æ¬¡å¤§çš„å­˜å…¥d
 
         else 
 		{
             d[dIndex].coef = a[aIndex].coef + b[bIndex].coef;
             d[dIndex].expo = a[aIndex].expo;
 
-            if (d[dIndex].coef != 0)//¥[Á`¬°0ªº¸Ü¤£³B²z
+            if (d[dIndex].coef != 0)//åŠ ç¸½ç‚º0çš„è©±ä¸è™•ç†
                 dIndex++;
 
             aIndex++,bIndex++;

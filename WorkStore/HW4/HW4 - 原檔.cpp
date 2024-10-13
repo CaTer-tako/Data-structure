@@ -1,4 +1,4 @@
-// HW4.cpp : ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
+// HW4.cpp : å®šç¾©ä¸»æŽ§å°æ‡‰ç”¨ç¨‹å¼çš„é€²å…¥é»žã€‚
 //
 
 #include <stdio.h>
