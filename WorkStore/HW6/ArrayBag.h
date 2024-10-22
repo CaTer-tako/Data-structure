@@ -199,45 +199,62 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
 template<class ItemType>
 bool ArrayBag<ItemType>::addFirst(const ItemType& newEntry)
 {
-
-	// add your code here.
-
-
-
-	return false;
+   bool hasRoomToAdd = (itemCount < maxItems);
+	if(hasRoomToAdd)
+   {
+      if(itemCount)
+         items[itemCount] = items[0];
+      items[0] = newEntry;
+      itemCount++;
+   }
+	return hasRoomToAdd;
 }  // end addFirst
 
 template<class ItemType>
 bool ArrayBag<ItemType>::insertFirst(const ItemType& newEntry)
 {
 
-	// add your code here.
-
-
-
-	return false;
+	bool hasRoomToInsert = (itemCount < maxItems);
+	if(hasRoomToInsert)
+   {
+      if(itemCount)
+         for(int i=itemCount; i > 0; i--)
+            items[i] = items[i-1];
+      items[0] = newEntry;
+      itemCount++;
+   }
+   return hasRoomToInsert;
 }  // end insertFirst
 
 template<class ItemType>
 bool ArrayBag<ItemType>::removeFirst()
 {
 
-	// add your code here.
+	bool VaildToRemove = (itemCount > 0);
+	
+   
+   if(VaildToRemove)
+   {
+      items[0] = items[itemCount-1];
+      itemCount--;
+   }
+   return VaildToRemove;
 
-
-
-	return false;
 }  // end removeFirst
 
 template<class ItemType>
 bool ArrayBag<ItemType>::deleteFirst()
 {
-
-	// add your code here.
-
-
-
-	return false;
+	bool VaildToDelete = (itemCount > 0);
+   if(VaildToDelete)
+   {
+      int i=0;
+      for(; i < itemCount-1; i++)
+          items[i] = items[i+1];
+      items[i] = '\0';
+      itemCount--;
+   }
+   return VaildToDelete;
 
 }  // end deleteFirst
 

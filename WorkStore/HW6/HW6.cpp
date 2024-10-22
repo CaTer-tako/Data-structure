@@ -1,7 +1,6 @@
-// HW6.cpp : ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
+// HW6.cpp : ï¿½wï¿½qï¿½Dï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Îµ{ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Jï¿½Iï¿½C
 //
 
-#include "stdafx.h"
 #include "BagInterface.h"
 #include "ArrayBag.h"
 #include "LinkedBag.h"
@@ -106,7 +105,7 @@ void bagTester(BagInterface<string>* bagPtr)
 int main()
 {
    BagInterface<string>* bagPtr = nullptr;
-   char userChoice;
+   char userChoice = '0'; //ç”¨æ–¼åˆå§‹åŒ–
 
    while (toupper(userChoice) != 'X') {
 	   cout << "Enter 'A' to test the array-based implementation\n"
