@@ -1,4 +1,4 @@
-// HW3.cpp : ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
+// HW3.cpp : ï¿½wï¿½qï¿½Dï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Îµ{ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Jï¿½Iï¿½C
 //
 
 #include <stdio.h>
@@ -17,7 +17,7 @@ typedef struct
 void clear(polynomialTerm t[]) 
 {
 	for ( int i = 0; i < MAX_TERMS; i++ ) 
-	{ //¥Î¨Ó¦s©ñ¦h¶µ¦¡
+	{ //ï¿½Î¨Ó¦sï¿½ï¿½hï¿½ï¿½ï¿½ï¿½
 		t[i].coef = 0;
 		t[i].expo = 0;
 	}
@@ -65,19 +65,22 @@ void inputTerm(polynomialTerm t[], int coef, int expo)
 		}
 		return;
 	}
+
 	for(int i = 0; i < MAX_TERMS; i++)
 	{
 		if( t[i].coef == 0)
 		{
 			t[i].expo = expo,t[i].coef = coef;
 			break;
-		}
-		if(t[i].expo == expo)
+		}//4 4 
+
+		if(t[i].expo == expo)//æœå°‹çš„å¹•æ¬¡ = æ–°å¹•æ¬¡
 		{
 			t[i].expo = expo,t[i].coef = coef;
 			break;
 		}
-		else if(expo > t[i].expo )
+
+		else if(expo > t[i].expo ) //
 		{
 			for(int j = MAX_TERMS-1; j >= i; j--)
 				t[j].expo = t[j-1].expo,t[j].coef = t[j-1].coef;
@@ -109,14 +112,14 @@ void addArrayBasedPoly(polynomialTerm a[], polynomialTerm b[], polynomialTerm d[
             d[dIndex] = b[bIndex];
             bIndex++;
         }
-		//±N¹õ¦¸¤jªº¦s¤Jd
+		//ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½sï¿½Jd
 
         else 
 		{
             d[dIndex].coef = a[aIndex].coef + b[bIndex].coef;
             d[dIndex].expo = a[aIndex].expo;
 
-            if (d[dIndex].coef != 0)//¥[Á`¬°0ªº¸Ü¤£³B²z
+            if (d[dIndex].coef != 0)//ï¿½[ï¿½`ï¿½ï¿½0ï¿½ï¿½ï¿½Ü¤ï¿½ï¿½Bï¿½z
                 dIndex++;
 
             aIndex++,bIndex++;
@@ -143,6 +146,7 @@ int main()
 
 			inputTerm( a, coef, expo );
 		}
+
 
 		cout << "\n\na = ";
 		printArrayBasedPoly( a );

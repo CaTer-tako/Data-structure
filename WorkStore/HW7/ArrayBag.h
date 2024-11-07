@@ -199,63 +199,65 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
 template<class ItemType>
 bool ArrayBag<ItemType>::addFirst(const ItemType& newEntry)
 {
-   bool hasRoomToAdd = (itemCount < maxItems);
-	if(hasRoomToAdd)
-   {
-      if(itemCount)
-         items[itemCount] = items[0];
-      items[0] = newEntry;
-      itemCount++;
-   }
+	bool hasRoomToAdd = (itemCount < maxItems);
+
+	if (hasRoomToAdd)
+	{
+		items[itemCount] = items[0];
+		items[0] = newEntry;
+		itemCount++;
+	}  // end if
+    
 	return hasRoomToAdd;
 }  // end addFirst
 
 template<class ItemType>
 bool ArrayBag<ItemType>::insertFirst(const ItemType& newEntry)
 {
+	bool hasRoomToAdd = (itemCount < maxItems);
 
-	bool hasRoomToInsert = (itemCount < maxItems);
-	if(hasRoomToInsert)
-   {
-      if(itemCount)
-         for(int i=itemCount; i > 0; i--)
-            items[i] = items[i-1];
-      items[0] = newEntry;
-      itemCount++;
-   }
-   return hasRoomToInsert;
+	if (hasRoomToAdd)
+	{
+		for ( int locatedIndex = itemCount; locatedIndex > 0; locatedIndex--)
+			items[locatedIndex] = items[locatedIndex-1];
+		
+		items[0] = newEntry;
+		itemCount++;
+	}  // end if
+    
+	return hasRoomToAdd;
 }  // end insertFirst
 
 template<class ItemType>
 bool ArrayBag<ItemType>::removeFirst()
 {
+   int locatedIndex = 0;
+	bool canRemoveItem = !isEmpty() && (locatedIndex > -1);
 
-	bool VaildToRemove = (itemCount > 0);
-	
-   
-   if(VaildToRemove)
-   {
-      items[0] = items[itemCount-1];
-      itemCount--;
-   }
-   return VaildToRemove;
-
+	if (canRemoveItem)
+	{
+		itemCount--;
+		items[locatedIndex] = items[itemCount];
+	}  // end if
+    
+	return canRemoveItem;
 }  // end removeFirst
 
 template<class ItemType>
 bool ArrayBag<ItemType>::deleteFirst()
 {
-	bool VaildToDelete = (itemCount > 0);
-   if(VaildToDelete)
-   {
-      int i=0;
-      for(; i < itemCount-1; i++)
-          items[i] = items[i+1];
-      items[i] = '\0';
-      itemCount--;
-   }
-   return VaildToDelete;
+    int locatedIndex = 0;
+	bool canRemoveItem = !isEmpty() && (locatedIndex > -1);
 
+	if (canRemoveItem)
+	{
+		itemCount--;
+
+		for ( int locatedIndex = 1; locatedIndex <= itemCount; locatedIndex++)
+			items[locatedIndex-1] = items[locatedIndex];
+	}  // end if
+    
+	return canRemoveItem;
 }  // end deleteFirst
 
 //#endif

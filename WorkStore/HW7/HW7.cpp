@@ -44,7 +44,7 @@ void bagTester(ArrayBag<string>& bag)
    cout << "insertFirst(\"extra\") returns " << bag.insertFirst("extra") << endl;
    
    displayBag(bag);
-   
+
    for (int i = 0; i < 6; i++)
    {
       bag.deleteFirst();
@@ -64,11 +64,10 @@ void bagTester(ArrayBag<string>& bag)
    cout << "deleteFirst() returns " << bag.deleteFirst() << endl;
 } // end bagTester
 
-
-void displayBag(BagInterface<string>* bagPtr)
+void displayBag(LinkedBag<string>* bagPtr)
 {
    cout << "The bag contains " << bagPtr->getCurrentSize()
-   << " items:" << endl;
+   << " items: ";
 	vector<string> bagItems = bagPtr->toVector();
    
    int numberOfEntries = (int)bagItems.size();
@@ -80,7 +79,7 @@ void displayBag(BagInterface<string>* bagPtr)
    cout << endl;
 }  // end displayBag
 
-void bagTester(BagInterface<string>* bagPtr)
+void bagTester(LinkedBag<string>* bagPtr)
 {
    cout << "isEmpty: returns " << bagPtr->isEmpty() << endl;
    
@@ -88,24 +87,72 @@ void bagTester(BagInterface<string>* bagPtr)
    cout << "Add 6 items to the bag: " << endl;
    
    for (int i = 0; i < 6; i++)
-   {
-      bagPtr->add(items[i]);
-   }  // end for
+       bagPtr->add(items[i]);
    
    displayBag(bagPtr);
-   cout << "isEmpty: returns " << bagPtr->isEmpty()
-   << "; should be 0 (false)" << endl;
-   cout << "getCurrentSize returns : " << bagPtr->getCurrentSize()
-   << "; should be 6" << endl;
+   cout << "isEmpty: returns " << bagPtr->isEmpty() << endl;
+   cout << "getCurrentSize returns : " << bagPtr->getCurrentSize() << endl;
    cout << "Try to add another entry: add(\"extra\") returns "
    << bagPtr->add("extra") << endl;
+   cout << "Try to add another entry: addToLast(\"extra1\") returns "
+   << bagPtr->addLast("extra1") << endl;
+   cout << "Try to add another entry: add2ndToLast(\"extra2\") returns "
+   << bagPtr->add2ndToLast("extra2") << endl;
+
+   displayBag(bagPtr);  
+   bagPtr->remove2ndToLast();
+   displayBag(bagPtr);  
+   bagPtr->removeLast();
+   displayBag(bagPtr);  
+   bagPtr->remove("extra");
+   displayBag(bagPtr);  
+
+   for (int i = 0; i < 7; i++)
+   {
+      bagPtr->removeLast();
+	  displayBag(bagPtr);
+   }  // end for
+
+   bagPtr->clear();
+
+   for (int i = 0; i < 6; i++)
+      bagPtr->add2ndToLast(items[i]);
+
+   displayBag(bagPtr);
+
+   for (int i = 0; i < 7; i++)
+   {
+      bagPtr->remove2ndToLast();
+	  displayBag(bagPtr);
+   }  // end for
+
+   for (int i = 0; i < 6; i++)
+      bagPtr->addLast(items[i]);
+
+   displayBag(bagPtr);
+      
+   for (int i = 0; i < 6; i++)
+   {
+     bagPtr->removeLast();
+	  displayBag(bagPtr);
+	  bagPtr->addLast(items[i]); //增加最後A
+	  displayBag(bagPtr);
+	  bagPtr->remove2ndToLast(); //移除2nd
+	  displayBag(bagPtr);
+	  bagPtr->add2ndToLast(items[i]);//增加2nd A
+	  displayBag(bagPtr);
+	  bagPtr->remove(items[i]);
+	  displayBag(bagPtr);
+   } 
+   bagPtr->remove2ndToLast();
+   displayBag(bagPtr);  
+   bagPtr->removeLast();
    displayBag(bagPtr);  
 }  // end bagTester
 
 int main()
 {
-   BagInterface<string>* bagPtr = nullptr;
-   char userChoice = '0'; //用於初始化
+   char userChoice = ' ';
 
    while (toupper(userChoice) != 'X') {
 	   cout << "Enter 'A' to test the array-based implementation\n"
@@ -121,6 +168,7 @@ int main()
 	   }
 	   else
 	   {
+		  LinkedBag<string>* bagPtr = nullptr;
 		  bagPtr = new LinkedBag<string>();
 		  cout << "Testing the Link-Based Bag:" << endl;
 		  cout << "The initial bag is empty." << endl;

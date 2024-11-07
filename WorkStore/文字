@@ -1,23 +1,25 @@
-#include <stdio.h>
-#include <memory.h>
+給你一塊矩形土地的長寬，再依序給定每個機器人的初始位置狀況及一連串的指令集，
+你必須用你的程式求出每個機器人最後的位置狀況。
+一個機器人的位置狀況包括了其坐標（ x 坐標， y 坐標），
+和它面向的方向（用 N , S , E , W 來分別代表北、南、東、西）。
+至於一個機器人所收到的指令集，是一個由字母 ' L ' ， ' R ' ， 和 ' F ' 所構成的字串，
+其分別代表：
+左轉（Left）：機器人在原地往左轉 90 度。
+右轉（Right）: 機器人在原地往右轉 90 度。
+前進（Forward）: 機器人往其面向的方向向前走一格，且不改變其面向之方向。
+從坐標 (x,y) 走至 (x,y+1) 的這個方向我們定義為北方。
 
-#define MAX_degree 10 /*MAX degree of polynomial+1 多項式的最大值+1*/
-
-typedef struct
-{
-	int degree; //最高幕次
-	int coef [MAX_degree]; //存放多項式各幕次的係數的陣列
-	/*多項式 3𝑥^2+5𝑥+1，coef[2]=3 coef[1]=5 coef[0]=1*/
-} polynomial;
-
-#define MAX_TERMS 20 /*size of terms array 項數陣列的大小*/
-typedef struct
-{
-	int coef; //係數
-	int expo; //幕次
-} polynomial_term;
-
-polynomial_term terms [MAX_TERMS];
-/*3𝑥^2+5𝑥+1,terms[0]=3x^2 terms[1]=5x...以此類推*/
-int avail = 0;
-	
+因為此矩形土地是有邊界的，所以一旦一個機器人走出邊界掉落下去，
+就相當於永遠消失了。不過這個掉下去的機器人會留下「標記 ( scent ) 」，
+提醒以後的機器人，避免他們從同一個地方掉下去。掉下去的機器人會把標記，
+留在他掉落之前所在的最後一個坐標點。所以對於以後的機器人，當他正位在有標記的地方時，
+這個機器人就會忽略會讓他掉下去的指令。
+5 3
+1 1 E
+RFRFRFRF
+3 2 N
+FRRFLLFFRRFLL
+0 3 W
+LLFFFLFLFL
+https://hackmd.io/@chingyan/Skou1K34A
+https://zerojudge.tw/ShowProblem?problemid=c082

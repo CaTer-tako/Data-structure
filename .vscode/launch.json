@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/Data-structure",
-      "program": "/workspaces/Data-structure/build/Debug/outDebug",
+      "cwd": "/workspaces/Data-structure/WorkStore/CPE",
+      "program": "/workspaces/Data-structure/WorkStore/CPE/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
